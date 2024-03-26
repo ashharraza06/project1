@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+		<Dialog id="Createxml" resizable="true" draggable="true" title ="Create customer entry">
+				<Label  showColon="true" text="	Customer id" />
+				<Input id="id" placeholder="Enter customer id" />
+				<Label  showColon="true" text=" Customer name" />
+				<Input id="name" placeholder="Enter name" />
+				<Label  showColon="true" text=" Customer address" />
+				<Input id="phone" placeholder="Enter phone number" />
+				<Label  showColon="true" text=" Customer ph no." />
+				<Input id="address" placeholder="Enter address" />
+				<Button 
+				core:require="{ handler: 'ecommerce/ext/controller/Create_handler'}"
+				press="handler.create_save"
+				text="Save" />
+				<Button 
+				core:require="{ handler: 'ecommerce/ext/controller/Create_handler'}"
+				press="handler.create_close"
+				text="Cancel" />
+		</Dialog>
+		
+
+</core:FragmentDefinition>

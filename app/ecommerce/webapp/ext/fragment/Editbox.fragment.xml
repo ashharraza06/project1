@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+		<Dialog id="Editxml" resizable="true" draggable="true" title ="Edit customer table">
+				<Label  showColon="true" text="	Customer id" />
+				<Input id="id"  />
+				<Label  showColon="true" text=" Customer name" />
+				<Input id="name" placeholder="Enter name" />
+				<Label  showColon="true" text=" Customer phone" />
+				<Input id="phone" placeholder="Enter phone number" />
+				<Label  showColon="true" text=" Customer address." />
+				<Input id="address" placeholder="Enter address" />
+				<Button 
+				core:require="{ handler: 'ecommerce/ext/fragment/Edit'}"
+				press= "handler.saveedit"
+				text="Save" />
+				<Button 
+				core:require="{ handler: 'ecommerce/ext/fragment/Edit'}"
+                press= "handler.canceledit"
+				text="Cancel" />
+		</Dialog>
+ </core:FragmentDefinition>

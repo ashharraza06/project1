@@ -1,0 +1,194 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "ecommerce",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.12.4",
+      "toolsId": "50571882-4d36-46dc-8a7f-0bfeba72a1f5"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/my/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.8",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ecommerce.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "customerList",
+          "target": "customerList"
+        },
+        {
+          "pattern": "customer({key}):?query:",
+          "name": "customerObjectPage",
+          "target": "customerObjectPage"
+        },
+        {
+          "pattern": "customer({key})/cust_to_order({key2}):?query:",
+          "name": "ordersObjectPage",
+          "target": "ordersObjectPage"
+        }
+      ],
+      "targets": {
+        "customerList": {
+          "type": "Component",
+          "id": "customerList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/customer",
+              "variantManagement": "Page",
+              "navigation": {
+                "customer": {
+                  "detail": {
+                    "route": "customerObjectPage"
+                  }
+                }
+              },
+              "initialLoad": "Enabled",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "actions": {
+                    "Create": {
+                      "press": "ecommerce.ext.controller.Create_handler.Create_method",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "Create"
+                    }
+                  },
+                  "columns": {
+                    "Edit": {
+                      "header": "Edit",
+                      "position": {
+                        "anchor": "DataField::cust_add",
+                        "placement": "After"
+                      },
+                      "template": "ecommerce.ext.fragment.Edit"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "customerObjectPage": {
+          "type": "Component",
+          "id": "customerObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/customer",
+              "navigation": {
+                "cust_to_order": {
+                  "detail": {
+                    "route": "ordersObjectPage"
+                  }
+                }
+              },
+              "content": {
+                "footer": {
+                  "actions": {
+                    "submit": {
+                      "press": "ecommerce.ext.controller.Submit.submit",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "submit"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ordersObjectPage": {
+          "type": "Component",
+          "id": "ordersObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/customer/cust_to_order"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}
